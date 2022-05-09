@@ -1,0 +1,3 @@
+- Array methods: 
+  + mutate: splice(), reverse()
+  + immutate: slice(), concat(), join(), at(), push(), pop(), shift(), unshift(), map(), filter(), reduce(), indexOf(), some(), every(), flat(depper), flatMap()
