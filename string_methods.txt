@@ -1,3 +1,10 @@
 - Array methods: 
-  + mutate: splice(), reverse()
-  + immutate: slice(), concat(), join(), at(), push(), pop(), shift(), unshift(), map(), filter(), reduce(), indexOf(), some(), every(), flat(depper), flatMap()
+  + mutate: splice(), reverse(), flat(deeper), flatMap(), fill()
+  + immutate: slice(), concat(), join(), at(), push(), pop(), shift(), unshift(), map(), filter(), reduce(), indexOf(), some(), every()
+
+- Convert to Array
+  + Cach 1: Array.from()
+  const newArr = Array.from(document.querySelectorAll('.label_value'), (el) => Number(el.textContent.replace('$', '')));
+
+  + Cach 2: [...NodeList] -> destructoring
+  const newArr = [...document.querySelectorAll('.label_value'), (el) => Number(el.textContent.replace('$', '')];

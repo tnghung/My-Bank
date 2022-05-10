@@ -6,6 +6,10 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
+
+  movementsDates: ['2019-11-18T21:31:17.178Z', '2019-12-23T07:42:02.383Z', '2020-01-28T09:15:04.904Z', '2020-04-01T10:17:24.185Z', '2020-05-08T14:11:59.604Z', '2020-05-27T17:01:17.194Z', '2020-07-11T23:36:17.929Z', '2020-07-12T10:51:36.790Z'],
+  currency: 'EUR',
+  locale: 'pt-PT', // de-
 };
 
 const account2 = {
@@ -13,6 +17,10 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account3 = {
@@ -20,6 +28,10 @@ const account3 = {
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account4 = {
@@ -27,6 +39,10 @@ const account4 = {
   movements: [430, -1000, 700, 50, 90],
   interestRate: 1,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account5 = {
@@ -34,6 +50,10 @@ const account5 = {
   movements: [20, -120, -300, 1000, 400, 200],
   interestRate: 1,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account6 = {
@@ -41,6 +61,10 @@ const account6 = {
   movements: [20, -120, -300, 1000, 400, 200],
   interestRate: 1,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account7 = {
@@ -48,6 +72,10 @@ const account7 = {
   movements: [20, -120, -300, 1000, 400, 200],
   interestRate: 1,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account8 = {
@@ -55,6 +83,10 @@ const account8 = {
   movements: [20, -120, -300, 1000, 400, 200],
   interestRate: 1,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const account9 = {
@@ -62,6 +94,10 @@ const account9 = {
   movements: [20, -120, -300, 1000, 400, 200],
   interestRate: 1,
   pin: 1111,
+
+  movementsDates: ['2019-11-01T13:15:33.035Z', '2019-11-30T09:48:16.867Z', '2019-12-25T06:04:23.907Z', '2020-01-25T14:18:46.235Z', '2020-02-05T16:33:06.386Z', '2020-04-10T14:43:26.374Z', '2020-06-25T18:49:59.371Z', '2020-07-26T12:01:20.894Z'],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const accounts = [account1, account2, account3, account4, account5, account6, account7, account8, account9];
@@ -238,7 +274,7 @@ btnLoan.addEventListener('click', function (e) {
     inputLoanAmount.blur();
   } else {
     alert("😬 You don't have deposit is greater than 10% request! 😬");
-    inputLoanAmount.focus();  
+    inputLoanAmount.focus();
   }
 });
 
@@ -265,27 +301,3 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-function calcAverageHumanAge(ages) {
-  const dogAgeToHumanAges = ages.map((age) => (age > 2 ? 16 + age * 4 : 2 * age));
-  const adultDogs = dogAgeToHumanAges.filter((age) => age >= 18);
-  const averageAdultDogAges = adultDogs.reduce((acc, age) => acc + age, 0) / adultDogs.length;
-  return averageAdultDogAges;
-}
-
-function calcAverageHumanAge2(ages) {
-  const averageAdultDogAges = ages
-    .map((age) => (age > 2 ? 16 + age * 4 : 2 * age))
-    .filter((age) => age >= 18)
-    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
-
-  return averageAdultDogAges;
-}
-
-const arr = [2, 31, -22, 44, 22, 3323, -9999];
-
-// return < 0, if a < b (keep)
-// return > 0, if a > b (switch)
-// arr.sort((a, b) => b - a);
