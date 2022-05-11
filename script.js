@@ -57,13 +57,14 @@ const account3 = {
     '2022-04-25T18:49:59.371Z',
     '2022-05-09T12:01:20.894Z',
   ],
-  currency: 'USD',
-  locale: 'en-US',
+  // ¥
+  currency: 'JPY',
+  locale: 'ja-JP',
 };
 
 const account4 = {
   owner: 'Huu Binh',
-  movements: [430, -1000, 700, 50, 90],
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 1,
   pin: 1111,
   movementsDates: [
@@ -76,13 +77,13 @@ const account4 = {
     '2022-04-25T18:49:59.371Z',
     '2022-05-09T12:01:20.894Z',
   ],
-  currency: 'USD',
-  locale: 'en-US',
+  currency: 'RUB',
+  locale: 'ru-RU',
 };
 
 const account5 = {
   owner: 'Duy Nam',
-  movements: [20, -120, -300, 1000, 400, 200],
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 1,
   pin: 1111,
 
@@ -96,13 +97,14 @@ const account5 = {
     '2022-04-25T18:49:59.371Z',
     '2022-05-09T12:01:20.894Z',
   ],
-  currency: 'USD',
-  locale: 'en-US',
+  // ¥
+  currency: 'JPY',
+  locale: 'ja-JP',
 };
 
 const account6 = {
   owner: 'Loc Son',
-  movements: [20, -120, -300, 1000, 400, 200],
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 1,
   pin: 1111,
 
@@ -122,7 +124,7 @@ const account6 = {
 
 const account7 = {
   owner: 'Van Toan',
-  movements: [20, -120, -300, 1000, 400, 200],
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 1,
   pin: 1111,
 
@@ -136,17 +138,19 @@ const account7 = {
     '2022-04-25T18:49:59.371Z',
     '2022-05-09T12:01:20.894Z',
   ],
-  currency: 'USD',
-  locale: 'en-US',
+  //¥
+  currency: 'CNY',
+  locale: 'zh-CN',
 };
 
 const account8 = {
   owner: 'Nhut Quang',
-  movements: [20, -120, -300, 1000, 400, 200],
+  movements: [20, -120, -300, 1000, 400, 200, -200, 400, 600],
   interestRate: 1,
   pin: 1111,
 
   movementsDates: [
+    '2021-12-01T13:15:33.035Z',
     '2021-12-01T13:15:33.035Z',
     '2022-02-25T09:48:16.867Z',
     '2022-03-25T06:04:23.907Z',
@@ -156,13 +160,13 @@ const account8 = {
     '2022-04-25T18:49:59.371Z',
     '2022-05-09T12:01:20.894Z',
   ],
-  currency: 'USD',
-  locale: 'en-US',
+  currency: 'TRY',
+  locale: 'tr-TR',
 };
 
 const account9 = {
   owner: 'Xuan Vy',
-  movements: [20, -120, -300, 1000, 400, 200],
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 1,
   pin: 1111,
 
@@ -260,13 +264,18 @@ const displayMovements = function (account, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const date = new Date(account.movementsDates[i]);
     const displayDate = formatMovementDate(date, account.locale);
+    const formattedMov = Intl.NumberFormat(account.locale, {
+      style: 'currency',
+      currency: account.currency,
+    }).format(mov);
+
     const html = `
     <div class="movements__row">
        <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
        <div class="movements__date">${displayDate}</div>
-       <div class="movements__value">${mov.toFixed(2)}$</div>
+       <div class="movements__value">${formattedMov}</div>
     </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -275,25 +284,44 @@ const displayMovements = function (account, sort = false) {
 
 const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `$${account.balance}`;
+  const formattedBalance = Intl.NumberFormat(account.locale, {
+    style: 'currency',
+    currency: account.currency,
+  }).format(account.balance);
+  labelBalance.textContent = `${formattedBalance}`;
 };
 
-const calcDisplaySummary = function (movements, interestRate) {
-  const incomes = movements
+const calcDisplaySummary = function (account) {
+  const incomes = account.movements
     .filter((mov) => mov > 0)
     .reduce((sum, mov) => sum + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}$`;
 
-  const outs = movements
+  const outs = account.movements
     .filter((mov) => mov < 0)
     .reduce((sum, mov) => sum + mov, 0);
-  labelSumOut.textContent = Math.abs(outs).toFixed(2);
 
-  const interests = movements
+  const interests = account.movements
     .filter((mov) => mov > 0)
-    .reduce((sum, mov) => sum + (mov * interestRate) / 100, 0);
+    .reduce((sum, mov) => sum + (mov * account.interestRate) / 100, 0);
 
-  labelSumInterest.textContent = `${interests.toFixed(2)}$`;
+  const formattedIncomes = Intl.NumberFormat(account.locale, {
+    style: 'currency',
+    currency: account.currency,
+  }).format(incomes);
+
+  const formattedOuts = Intl.NumberFormat(account.locale, {
+    style: 'currency',
+    currency: account.currency,
+  }).format(Math.abs(outs));
+
+  const formattedInterests = Intl.NumberFormat(account.locale, {
+    style: 'currency',
+    currency: account.currency,
+  }).format(interests);
+
+  labelSumIn.textContent = formattedIncomes;
+  labelSumOut.textContent = formattedOuts;
+  labelSumInterest.textContent = formattedInterests;
 };
 
 let currentAccount;
@@ -302,7 +330,7 @@ const updateUI = function (currentAccount) {
   calcDisplayBalance(currentAccount);
 
   // Display summary
-  calcDisplaySummary(currentAccount.movements, currentAccount.interestRate);
+  calcDisplaySummary(currentAccount);
 
   // Display movements
   displayMovements(currentAccount);
