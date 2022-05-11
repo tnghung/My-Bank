@@ -253,6 +253,13 @@ const formatMovementDate = function (date, locale) {
   }
 };
 
+const formatCurrencyValue = function (locale, currency, value) {
+  return Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+
 const displayMovements = function (account, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -284,10 +291,11 @@ const displayMovements = function (account, sort = false) {
 
 const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
-  const formattedBalance = Intl.NumberFormat(account.locale, {
-    style: 'currency',
-    currency: account.currency,
-  }).format(account.balance);
+  const formattedBalance = formatCurrencyValue(
+    account.locale,
+    account.currency,
+    account.balance
+  );
   labelBalance.textContent = `${formattedBalance}`;
 };
 
@@ -304,24 +312,21 @@ const calcDisplaySummary = function (account) {
     .filter((mov) => mov > 0)
     .reduce((sum, mov) => sum + (mov * account.interestRate) / 100, 0);
 
-  const formattedIncomes = Intl.NumberFormat(account.locale, {
-    style: 'currency',
-    currency: account.currency,
-  }).format(incomes);
-
-  const formattedOuts = Intl.NumberFormat(account.locale, {
-    style: 'currency',
-    currency: account.currency,
-  }).format(Math.abs(outs));
-
-  const formattedInterests = Intl.NumberFormat(account.locale, {
-    style: 'currency',
-    currency: account.currency,
-  }).format(interests);
-
-  labelSumIn.textContent = formattedIncomes;
-  labelSumOut.textContent = formattedOuts;
-  labelSumInterest.textContent = formattedInterests;
+  labelSumIn.textContent = formatCurrencyValue(
+    account.locale,
+    account.currency,
+    incomes
+  );
+  labelSumOut.textContent = formatCurrencyValue(
+    account.locale,
+    account.currency,
+    outs
+  );
+  labelSumInterest.textContent = formatCurrencyValue(
+    account.locale,
+    account.currency,
+    interests
+  );
 };
 
 let currentAccount;
