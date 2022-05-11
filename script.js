@@ -10,15 +10,15 @@ const account1 = {
   movementsDates: [
     '2022-02-18T21:31:17.178Z',
     '2022-02-23T07:42:02.383Z',
-    '2022-03-28T09:15:04.904Z',
+    '2022-02-28T09:15:04.904Z',
     '2022-03-01T10:17:24.185Z',
     '2022-04-08T14:11:59.604Z',
-    '2022-05-27T17:01:17.194Z',
+    '2022-04-27T17:01:17.194Z',
     '2022-05-11T23:36:17.929Z',
     '2022-05-11T23:36:17.929Z',
   ],
-  currency: 'EUR',
-  locale: 'pt-PT', // de-
+  currency: 'VND',
+  locale: 'vi-VN',
 };
 
 const account2 = {
@@ -30,12 +30,12 @@ const account2 = {
   movementsDates: [
     '2021-12-01T13:15:33.035Z',
     '2022-02-25T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-02-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-03-10T14:43:26.374Z',
-    '2022-03-25T18:49:59.371Z',
-    '2022-05-26T12:01:20.894Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -48,14 +48,14 @@ const account3 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -66,16 +66,15 @@ const account4 = {
   movements: [430, -1000, 700, 50, 90],
   interestRate: 1,
   pin: 1111,
-
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -88,14 +87,14 @@ const account5 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -108,14 +107,14 @@ const account6 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -128,14 +127,14 @@ const account7 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -148,14 +147,14 @@ const account8 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -168,14 +167,14 @@ const account9 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-05-01T13:15:33.035Z',
-    '2022-04-30T09:48:16.867Z',
-    '2022-02-25T06:04:23.907Z',
-    '2022-01-25T14:18:46.235Z',
-    '2022-02-05T16:33:06.386Z',
-    '2022-05-10T14:43:26.374Z',
-    '2022-01-25T18:49:59.371Z',
-    '2022-02-26T12:01:20.894Z',
+    '2021-12-01T13:15:33.035Z',
+    '2022-02-25T09:48:16.867Z',
+    '2022-03-25T06:04:23.907Z',
+    '2022-03-25T14:18:46.235Z',
+    '2022-04-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-04-25T18:49:59.371Z',
+    '2022-05-09T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -219,8 +218,6 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const weekdays = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
-
 const createUsernames = function (accs) {
   accs.forEach((acc) => {
     acc.username = acc.owner
@@ -232,16 +229,13 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const now = new Date();
   const daysPassed = Math.floor(Math.abs(now - date) / (1000 * 60 * 60 * 24));
 
   console.log(daysPassed);
 
-  const day = String(date.getDate()).padStart(2, 0);
-  const month = String(date.getMonth()).padStart(2, 0);
-  const year = date.getFullYear();
-  const displayDate = `${day}/${month}/${year}`;
+  const displayDate = Intl.DateTimeFormat(locale).format(date);
 
   switch (true) {
     case daysPassed === 0:
@@ -249,13 +243,11 @@ const formatMovementDate = function (date) {
     case daysPassed === 1:
       return 'Yesterday';
     case daysPassed >= 2 && daysPassed < 7:
-      return daysPassed + 'days ago';
+      return daysPassed + ' days ago';
     default:
       return displayDate;
   }
 };
-
-let currentAccount;
 
 const displayMovements = function (account, sort = false) {
   containerMovements.innerHTML = '';
@@ -267,7 +259,7 @@ const displayMovements = function (account, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const date = new Date(account.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, account.locale);
     const html = `
     <div class="movements__row">
        <div class="movements__type movements__type--${type}">${
@@ -304,6 +296,7 @@ const calcDisplaySummary = function (movements, interestRate) {
   labelSumInterest.textContent = `${interests.toFixed(2)}$`;
 };
 
+let currentAccount;
 const updateUI = function (currentAccount) {
   // Display balance
   calcDisplayBalance(currentAccount);
@@ -314,22 +307,6 @@ const updateUI = function (currentAccount) {
   // Display movements
   displayMovements(currentAccount);
 };
-
-// FAKE AUTO LOGIN
-currentAccount = account1;
-containerApp.style.opacity = '1';
-labelWelcome.textContent = `Good Morning, ${currentAccount.owner
-  .split(' ')
-  .at(-1)}!`;
-updateUI(currentAccount);
-const now = new Date();
-const dayOfWeek = weekdays[now.getDay() - 1];
-const day = String(now.getDate()).padStart(2, 0);
-const month = String(now.getMonth()).padStart(2, 0);
-const year = now.getFullYear();
-const hour = now.getHours();
-const minutes = String(now.getMinutes()).padStart(2, 0);
-labelDate.textContent = `${dayOfWeek} ${day}/${month}/${year}, ${hour}:${minutes}`;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -351,6 +328,24 @@ btnLogin.addEventListener('click', function (e) {
       .split(' ')
       .at(-1)}!`;
 
+    const now = new Date();
+
+    // Define locale from browser
+    // const locale = navigator.language;
+
+    // Make a options to format a date
+    const options = {
+      weekday: 'short', // short
+      day: 'numeric', // long, shor, 2-digit
+      month: 'numeric', // 2-digit, short
+      year: 'numeric', // short, 2-digit
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+
+    labelDate.textContent = Intl.DateTimeFormat(currentAccount.locale, options)
+      .format(now)
+      .replace(',', '');
     updateUI(currentAccount);
   } else {
     alert('😥 Wrong username or PIN! 😥');
@@ -360,7 +355,6 @@ btnLogin.addEventListener('click', function (e) {
 });
 
 let isSort = false;
-
 btnSort.addEventListener('click', function () {
   displayMovements(currentAccount, !isSort);
   isSort = !isSort;
