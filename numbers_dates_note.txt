@@ -1,0 +1,97 @@
+//-------------- Number --------------//
+1. Conversion
+- console.log(Number('23'));
+- console.log(+'23');
+
+2. Parsing
+- console.log(Number.parseInt('23.5')); // 23
+- console.log(Number.parseInt('23rem')); // 23
+- console.log(Number.parseInt('e23')); // NaN
+- console.log(Number.parseFloat('23.5')); // 23.5
+
+3. Check if value is a Number (Number.isFinite())
+- console.log(Number.isFinite(20)); // true
+- console.log(Number.isFinite('20')); // false
+- console.log(Number.isFinite(+'20X')); // false
+- console.log(Number.isFinite(23 / 0)); // false
+
+4. Random function
+const randomInt = (min, max) => Math.floor(Math.random() * (max-min) + 1) + min;
+
+
+////////////////////////////////////////
+//--------------- Date --------------//
+1. Create dates
+- const now = new Date();
+- const d1 = new Date('Dec 02 2021 18:05:41');
+- const d2 = new Date('December 28, 2000');
+- const future = new Date(2037, 10, 19, 15, 23);
+- const dayByTimeStamp = new Date(2142256980000);
+
+2. Working with Date
+- console.log(future.getFullYear());
+- console.log(future.getMonth());
+- console.log(future.getDate());
+- console.log(future.getDay());
+- console.log(future.getHours());
+- console.log(future.getMinutes());
+- console.log(future.getSeconds());
+- console.log(future.toISOString());
+- console.log(future.getTime());
+
+3. Operations with Date
+const future = new Date(2037, 10, 19, 15, 23);
+const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+const daysPassed = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14)); // 10 days
+
+
+//////////////////////////////////////////////
+// ----------- Internationalizing -----------//
+1. DateTimeFormat
+const now = new Date();
+const locale = 'vi-VN'; // Use navigator.language to get the locale from browser
+const options = {
+    weekday: 'long',
+    day: 'numeric',
+    month: '2-digit',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+};
+// Default
+const dateFormattedDefault = Intl.DateTimeFormat(locale).format(now); // 28/12/2021
+// With options
+const dateFormatted = Intl.DateTimeFormat(locale, options).format(now); // 10:15 Th 5, 28/12/2021
+
+2. NumerFormat (this case use for currency)
+// REMEBER: currency will format depend on currency NOT locale
+const options = {
+  style: 'currency',
+  unit: 'celsius',
+  currency: 'EUR',
+  // useGrouping: false,
+};
+console.log('US:      ', new Intl.NumberFormat('en-US', options).format(num));
+console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(num));
+console.log('Syria:   ', new Intl.NumberFormat('ar-SY', options).format(num));
+
+
+
+//////////////////////////////////////////////
+// ----------- Timer -----------//
+
+1. setTimeout
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`),
+  3000,
+  ...ingredients
+);
+console.log('Waiting...');
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+2. setInterval
+setInterval(function () {
+  const now = new Date();
+  console.log(now);
+}, 1000);

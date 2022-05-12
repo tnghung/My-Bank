@@ -7,7 +7,7 @@ const account1 = {
   interestRate: 1.2,
   pin: 1111,
 
-  movementsDates: ['2022-02-18T21:31:17.178Z', '2022-02-23T07:42:02.383Z', '2022-02-28T09:15:04.904Z', '2022-03-01T10:17:24.185Z', '2022-04-08T14:11:59.604Z', '2022-04-27T17:01:17.194Z', '2022-05-11T23:36:17.929Z', '2022-05-11T23:36:17.929Z'],
+  movementsDates: ['2022-02-18T21:31:17.178Z', '2022-02-23T07:42:02.383Z', '2022-02-28T09:15:04.904Z', '2022-03-01T10:17:24.185Z', '2022-04-08T14:11:59.604Z', '2022-04-27T17:01:17.194Z', '2022-05-10T12:36:17.929', '2022-05-10T12:36:17.929'],
   currency: 'VND',
   locale: 'vi-VN',
 };
@@ -131,6 +131,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const createUsernames = function (accs) {
+  // Create username by owner: Nguyen Hung -> nh
   accs.forEach((acc) => {
     acc.username = acc.owner
       .toLowerCase()
@@ -145,20 +146,13 @@ const formatMovementDate = function (date, locale) {
   const now = new Date();
   const daysPassed = Math.floor(Math.abs(now - date) / (1000 * 60 * 60 * 24));
 
-  console.log(daysPassed);
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 6) return `${daysPassed} days ago`;
+  if (daysPassed === 7) return `One week ago`;
+  if (daysPassed === 30) return `One month ago`;
 
-  const displayDate = Intl.DateTimeFormat(locale).format(date);
-
-  switch (true) {
-    case daysPassed === 0:
-      return 'Today';
-    case daysPassed === 1:
-      return 'Yesterday';
-    case daysPassed >= 2 && daysPassed < 7:
-      return daysPassed + ' days ago';
-    default:
-      return displayDate;
-  }
+  return Intl.DateTimeFormat(locale).format(date);
 };
 
 const formatCurrencyValue = function (locale, currency, value) {
@@ -167,8 +161,6 @@ const formatCurrencyValue = function (locale, currency, value) {
     currency: currency,
   }).format(value);
 };
-
-const countDownTimer = function () {};
 
 const displayMovements = function (account, sort = false) {
   containerMovements.innerHTML = '';
@@ -213,8 +205,6 @@ const calcDisplaySummary = function (account) {
   labelSumInterest.textContent = formatCurrencyValue(account.locale, account.currency, interests);
 };
 
-let currentAccount;
-
 const logOut = function () {
   alert('Your time is out! Please log in again 😘');
   containerApp.style.opacity = '0';
@@ -223,17 +213,29 @@ const logOut = function () {
 };
 
 const startLogOutTimer = function () {
-  let time = 300;
-  setInterval(function () {
+  const tick = function () {
     const mins = String(Math.trunc(time / 60)).padStart(2, 0);
     const secs = String(Math.trunc(time % 60)).padStart(2, 0);
     labelTimer.textContent = `${mins}:${secs}`;
-    time--;
 
+    // Reset timer and logout account
     if (time === 0) {
+      clearInterval(timer);
       logOut();
     }
-  }, 1000);
+
+    // Decreased 1 second
+    time--;
+  };
+
+  // Set time to 5 minutes
+  let time = 300;
+
+  // Call function immediately not to wait for 1 section by interval
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
 };
 
 const updateUI = function (currentAccount) {
@@ -247,10 +249,11 @@ const updateUI = function (currentAccount) {
   displayMovements(currentAccount);
 };
 
+let currentAccount, timer;
+
+// Login fuction
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-
-  startLogOutTimer();
 
   currentAccount = accounts.find((acc) => acc.username === inputLoginUsername.value.trim());
 
@@ -276,8 +279,8 @@ btnLogin.addEventListener('click', function (e) {
 
     const now = new Date();
 
-    // Define locale from browser
-    // const locale = navigator.language;
+    /* Define locale from browser
+    const locale = navigator.language;*/
 
     // Make a options to format a date
     const options = {
@@ -289,21 +292,37 @@ btnLogin.addEventListener('click', function (e) {
       minute: 'numeric',
     };
 
+    // DOM with formated date
     labelDate.textContent = Intl.DateTimeFormat(currentAccount.locale, options).format(now).replace(',', '');
+
+    // Timer
+    if (timer) {
+      clearInterval(timer);
+    }
+    timer = startLogOutTimer();
+
+    // Reset UI
     updateUI(currentAccount);
-  } else {
+  }
+
+  // Catch Error: Wrong username or PIN
+  else {
     alert('😥 Wrong username or PIN! 😥');
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginUsername.focus();
   }
 });
 
+// Sort movements function
 let isSort = false;
 btnSort.addEventListener('click', function () {
   displayMovements(currentAccount, !isSort);
+
+  // Toggle sort state
   isSort = !isSort;
 });
 
+// Transfer function
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -334,6 +353,7 @@ btnTransfer.addEventListener('click', function (e) {
     return;
   }
 
+  // Valid account
   if (recipentAccount) {
     // Update movements data for current account and recipent account
     currentAccount.movements.push(-amount);
@@ -341,125 +361,68 @@ btnTransfer.addEventListener('click', function (e) {
     recipentAccount.movements.push(amount);
     recipentAccount.movementsDates.push(new Date().toISOString());
 
-    setTimeout(() => {
-      updateUI(currentAccount);
-      inputTransferTo.value = inputTransferAmount.value = '';
-      inputTransferAmount.blur();
-    }, 1000);
-  } else {
+    updateUI(currentAccount);
+    inputTransferTo.value = inputTransferAmount.value = '';
+    inputTransferAmount.blur();
+  }
+
+  // Wrong recipent's name
+  else {
     alert("Wrong recipent's name! Please check again");
     inputTransferTo.focus();
   }
 });
 
+// Loan function
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = +inputLoanAmount.value;
+
+  // Valid request loan value
   if (amount > 0 && currentAccount.movements.some((mov) => mov >= 0.1 * amount)) {
+    // Update movements
     currentAccount.movements.push(amount);
     currentAccount.movementsDates.push(new Date().toISOString());
-    setTimeout(function () {
-      updateUI(currentAccount);
-      inputLoanAmount.value = '';
-      inputLoanAmount.blur();
-    }, 500);
-  } else {
+
+    updateUI(currentAccount);
+    inputLoanAmount.value = '';
+    inputLoanAmount.blur();
+
+    // Reset TImer
+    clearInterval(timer);
+    timer = startLogOutTimer();
+  }
+  // Catch Error: deposit < 0.1 request
+  else {
     alert("😬 You don't have deposit is greater than 10% request! 😬");
     inputLoanAmount.focus();
   }
 });
 
+// Close account function
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
+  // Valid username and PIN
   if (inputCloseUsername.value.trim() === currentAccount.username && +inputClosePin.value === currentAccount.pin) {
+    // Delete account and update data
     const index = accounts.findIndex((acc) => acc.username === currentAccount.username);
     accounts.splice(index, 1);
+
+    // Update UI
     alert('Delete success!');
     containerApp.style.opacity = '0';
     currentAccount = undefined;
     labelWelcome.textContent = `Log in to get started`;
     inputCloseUsername.value = inputClosePin.value = '';
-  } else {
+  }
+
+  // Catch Error: Wrong username or PIN
+  else {
     alert('😢 Check for username or PIN! 😢');
+
+    // Reset input fields
     inputCloseUsername.value = inputClosePin.value = '';
     inputCloseUsername.focus();
   }
 });
-
-// LECTURES
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-/*
-// Creating Dates
-// Create a date
-const now = new Date();
-console.log(now);
-console.log(new Date('Aug 02 2022 18:05:41'));
-console.log(new Date('December 24, 2015'));
-console.log(new Date(account1.movementsDates[0]));
-console.log(new Date(2037, 10, 19, 15, 23, 5));
-console.log(new Date(2037, 10, 31));
-console.log(new Date(0));
-console.log(new Date(3 * 24 * 60 * 60 * 1000));
-// Working with dates
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(future);
-console.log(future.getFullYear());
-console.log(future.getMonth());
-console.log(future.getDate());
-console.log(future.getDay());
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.getSeconds());
-console.log(future.toISOString());
-console.log(future.getTime());
-console.log(new Date(2142256980000));
-console.log(Date.now());
-future.setFullYear(2040);
-console.log(future);
-///////////////////////////////////////
-// Operations With Dates
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(+future);
-const calcDaysPassed = (date1, date2) =>
-  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
-const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
-console.log(days1);
-///////////////////////////////////////
-// Internationalizing Numbers (Intl)
-const num = 3884764.23;
-const options = {
-  style: 'currency',
-  unit: 'celsius',
-  currency: 'EUR',
-  // useGrouping: false,
-};
-console.log('US:      ', new Intl.NumberFormat('en-US', options).format(num));
-console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(num));
-console.log('Syria:   ', new Intl.NumberFormat('ar-SY', options).format(num));
-console.log(
-  navigator.language,
-  new Intl.NumberFormat(navigator.language, options).format(num)
-);
-///////////////////////////////////////
-// Timers
-// setTimeout
-const ingredients = ['olives', 'spinach'];
-const pizzaTimer = setTimeout(
-  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`),
-  3000,
-  ...ingredients
-);
-console.log('Waiting...');
-if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
-// setInterval
-setInterval(function () {
-  const now = new Date();
-  console.log(now);
-}, 1000);
-*/

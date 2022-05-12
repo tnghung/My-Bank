@@ -8,3 +8,4 @@
 
   + Cach 2: [...NodeList] -> destructoring
   const newArr = [...document.querySelectorAll('.label_value'), (el) => Number(el.textContent.replace('$', '')];
+  
