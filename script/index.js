@@ -9,7 +9,7 @@ const header = document.querySelector('.header');
 const sections = document.querySelectorAll('.section');
 const targetImages = document.querySelectorAll('img[data-src]');
 const logo = document.querySelector('.nav__logo');
-const slider = document.querySelector('.slider');
+const sliderContainer = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
 const dotContainer = document.querySelector('.dots');
 
@@ -19,6 +19,7 @@ const btnsTab = document.querySelectorAll('.operations__tab');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
+const btnSignUp = document.querySelector('.btn--sign-up');
 
 const containerTab = document.querySelector('.operations__tab-container');
 const containerNav = document.querySelector('.nav__links');
@@ -36,18 +37,28 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
+// Handle Modal
 btnsOpenModal.forEach((btnOpenModal) => btnOpenModal.addEventListener('click', openModal));
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-btnScrollTo.addEventListener('click', () => section1.scrollIntoView({ behavior: 'smooth' }));
-
-logo.addEventListener('click', () => header.scrollIntoView({ behavior: 'smooth' }));
-
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
+  }
+});
+
+// Scroll Smooth animation
+btnScrollTo.addEventListener('click', () => section1.scrollIntoView({ behavior: 'smooth' }));
+logo.addEventListener('click', () => header.scrollIntoView({ behavior: 'smooth' }));
+containerNav.addEventListener('click', function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    e.preventDefault();
+    const linkClicked = e.target;
+    const id = linkClicked.getAttribute('href');
+    if (id === '#') return;
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
 
@@ -95,18 +106,7 @@ const handleHover = (opacity) =>
 nav.addEventListener('mouseover', handleHover(0.5));
 nav.addEventListener('mouseout', handleHover(1));
 
-// -----------------------------
-// Scroll smooth animation
-containerNav.addEventListener('click', function (e) {
-  if (e.target.classList.contains('nav__link')) {
-    e.preventDefault();
-    const linkClicked = e.target;
-    const id = linkClicked.getAttribute('href');
-    if (id === '#') return;
-    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-  }
-});
-
+// ----------------------
 // Make sticky nav
 // Cách 1: dùng window với event scroll
 // window.addEventListener('scroll', function () {
@@ -156,10 +156,11 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 });
 
 sections.forEach((section) => {
-  // section.classList.add('section--hidden');
+  section.classList.add('section--hidden');
   sectionObserver.observe(section);
 });
 
+// -----------------
 // Lazy Loading image animation
 const imageObserver = new IntersectionObserver(
   (entries, observe) => {
@@ -185,61 +186,68 @@ const imageObserver = new IntersectionObserver(
 
 targetImages.forEach((img) => imageObserver.observe(img));
 
-// Slider component
+// Create slider component
+const slider = function () {
+  let curSlide = 0;
+  let maxSlide = slides.length;
 
-let curSlide = 0;
-let maxSlide = slides.length;
+  // 0 100% 200% 300% ...
+  const goToSlide = function (slide) {
+    slides.forEach((s, i) => (s.style.transform = `translateX(${(i - slide) * 100}%)`));
+    activeDot(slide);
+  };
 
-// 0 100% 200% 300% ...
-const goToSlide = function (slide) {
-  slides.forEach((s, i) => (s.style.transform = `translateX(${(i - slide) * 100}%)`));
-  activeDot(slide);
-};
+  const createDots = function () {
+    slides.forEach((_, i) => {
+      dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`);
+    });
+  };
 
-const createDots = function () {
-  slides.forEach((_, i) => {
-    dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`);
+  const activeDot = function (slide) {
+    document.querySelectorAll('.dots__dot').forEach((dot) => dot.classList.remove('dots__dot--active'));
+
+    document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
+  };
+
+  createDots();
+  goToSlide(0);
+
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+    goToSlide(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+  };
+
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') nextSlide();
+    else if (e.key === 'ArrowLeft') prevSlide();
   });
 };
 
-const activeDot = function (slide) {
-  document.querySelectorAll('.dots__dot').forEach((dot) => dot.classList.remove('dots__dot--active'));
+slider();
 
-  document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
-};
-
-createDots();
-goToSlide(0);
-
-const nextSlide = function () {
-  if (curSlide === maxSlide - 1) {
-    curSlide = 0;
-  } else {
-    curSlide++;
-  }
-  goToSlide(curSlide);
-};
-
-const prevSlide = function () {
-  if (curSlide === 0) {
-    curSlide = maxSlide - 1;
-  } else {
-    curSlide--;
-  }
-  goToSlide(curSlide);
-};
-
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', prevSlide);
-
-dotContainer.addEventListener('click', function (e) {
-  if (e.target.classList.contains('dots__dot')) {
-    const { slide } = e.target.dataset;
-    goToSlide(slide);
-  }
-});
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'ArrowRight') nextSlide();
-  else if (e.key === 'ArrowLeft') prevSlide();
+btnSignUp.addEventListener('click', function (e) {
+  console.log(document.querySelectorAll('input').forEach((ele) => (ele.value = '')));
 });
