@@ -3,3 +3,24 @@
 - Downway (chilld): => querySelector(), getElementBy...(), ele.childNode(), ele.children()
 - SideWay (siblings): => ele.previousElement(). ele.nextElementSibling => Cách hay nhất là chui ra thằng cha rồi tìm
 - Upway (parent): => ele.closest()
+
+2. Lifecycle DOM Events
+
+2.1) DOMContentLoaded event của document
+=> As soon as the HTML is completely parsed.
+( which mean the HTML has been downloaded and been convert to the DOM tree.
+Also all scripts must be downloaded and executed before the DOMContentLoaded happen.)
+=> This event does actually NOT wait for images and other external resources (CSS) to load
+=> Just HTML and Javascript need to be loaded
+document.addEventListener('DOMContentLoaded', nameFunction);
+
+2.2) load event của window
+=> After the HTML is completely parsed and also the images, external resources finish
+window.addEventListener('load',nameFunction);
+
+2.3) beforeunload của window
+=> Before you want to leave the website, it will have the alert to ask you confirm to leave
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  e.returnValue = '';
+});

@@ -248,6 +248,13 @@ const slider = function () {
 
 slider();
 
+// Reset input
 btnSignUp.addEventListener('click', function (e) {
   console.log(document.querySelectorAll('input').forEach((ele) => (ele.value = '')));
+});
+
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
 });
