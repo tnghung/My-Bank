@@ -1,0 +1,5 @@
+// ele = element
+1. Selecting
+- Downway (chilld): => querySelector(), getElementBy...(), ele.childNode(), ele.children()
+- SideWay (siblings): => ele.previousElement(). ele.nextElementSibling => Cách hay nhất là chui ra thằng cha rồi tìm
+- Upway (parent): => ele.closest()
